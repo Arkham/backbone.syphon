@@ -211,4 +211,25 @@ describe("serializing a form", function(){
     });
   });
 
+  describe("when the view does not contain a form", function() {
+    var View = Backbone.View.extend({
+      render: function(){
+        this.$el.html("<input type='text' name='foo' value='bar'>");
+      }
+    });
+
+    beforeEach(function() {
+      view = new View();
+      view.render();
+
+      result = Backbone.Syphon.serialize(view);
+    });
+
+    it("retrieves the inputs' values", function() {
+      expect(result.foo).toBe("bar");
+    });
+  });
+
+
+
 });
