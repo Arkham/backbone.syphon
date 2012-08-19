@@ -454,7 +454,6 @@ For more information on Key Assignment Validators, see the full
 There some known limitations in Backbone.Syphon, partially by design and
 partially implemented as default behaivors. 
 
-* You must have a `<form>` within your view's `$el`
 * An input of type `checkbox` will return a boolean value. This can be
 overriden by replacing the Input Reader for checkboxes.
 
