@@ -95,6 +95,11 @@ Backbone.Syphon = (function(Backbone, $, _){
     }
 
     elements = _.reject(elements, function(el){
+      // Directly reject disabled elements
+      if (el.hasAttribute('disabled')) {
+        return true;
+      }
+
       var reject;
       var type = getElementType(el);
       var extractor = config.keyExtractors.get(type);
