@@ -100,7 +100,7 @@ Backbone.Syphon = (function(Backbone, $, _){
 
     elements = _.reject(elements, function(el){
       // Reject disabled fields always
-      if (el.hasAttribute('disabled')) return true;
+      if (el.hasAttribute('disabled')) { return true; }
 
       var reject;
       var type = getElementType(el);
