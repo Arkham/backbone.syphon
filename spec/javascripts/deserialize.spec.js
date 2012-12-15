@@ -214,4 +214,28 @@ describe("deserializing an object into a form", function(){
     });
   });
 
+
+  describe("when deserializing without a form", function(){
+    var View = Backbone.View.extend({
+      render: function(){
+        this.$el.html("<input type='text' name='foo'>");
+      }
+    });
+
+    var view;
+
+    beforeEach(function(){
+      view = new View();
+      view.render();
+
+      Backbone.Syphon.deserialize(view, { foo: "bar" });
+    });
+
+    it("should set the input's value", function(){
+      var result = view.$('input[name=foo]').val();
+      expect(result).toBe("bar");
+    });
+  });
+
+
 });

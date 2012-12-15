@@ -89,14 +89,24 @@ Backbone.Syphon = (function(Backbone, $, _){
   // from the form
   var getInputElements = function(view, config){
     var form = getForm(view);
-    var elements = form.elements;
+    var elements;
+
+    if (form) {
+      elements = form.elements;
+    } else {
+      // fallback on :input selector
+      elements = view.$(':input');
+    }
 
     elements = _.reject(elements, function(el){
+      // Reject disabled fields always
+      if (el.hasAttribute('disabled')) return true;
+
       var reject;
       var type = getElementType(el);
       var extractor = config.keyExtractors.get(type);
       var identifier = extractor($(el));
-     
+
       var foundInIgnored = _.include(config.ignoredTypes, type);
       var foundInInclude = _.include(config.include, identifier);
       var foundInExclude = _.include(config.exclude, identifier);
